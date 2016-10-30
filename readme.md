@@ -6,15 +6,15 @@
 4. Run command : "php artisan key:generate"
 5. Create "schneider" BD on mysql
 6. Update .env
-    APP_ENV=local
+	APP_ENV=local
 	APP_DEBUG=true
-	APP_KEY=r3AxqGy1cwFEULWQec4dEaEIpwTwzLrd
+	APP_KEY="your php artisan key:generate"
 
 	DB_HOST=127.0.0.1
 	DB_DATABASE=schneider
 	DB_USERNAME=root
 	DB_PASSWORD=
-
+	
 	CACHE_DRIVER=file
 	SESSION_DRIVER=file
 	QUEUE_DRIVER=sync
@@ -25,4 +25,5 @@
 	MAIL_USERNAME=null
 	MAIL_PASSWORD=null
 	MAIL_ENCRYPTION=null
+
 6. Run command : "php artisan serve"
