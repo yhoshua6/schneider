@@ -17,6 +17,8 @@ class CreatematerialEntregasTable extends Migration
             $table->increments('id');
             $table->integer('producto_id')->unsigned();
             $table->integer('empleado_id')->unsigned();
+            $table->string('guid', 255);
+            $table->string('barcode', 255);
             $table->integer('cantidad');
             $table->string('fechaEntrega');
             $table->timestamps();

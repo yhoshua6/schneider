@@ -10,6 +10,18 @@
     {!! Form::number('empleado_id', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Guid Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('guid', 'Guid:') !!}
+    {!! Form::text('guid', null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Barcode Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('barcode', 'Barcode:') !!}
+    {!! Form::text('barcode', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Cantidad Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('cantidad', 'Cantidad:') !!}

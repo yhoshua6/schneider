@@ -16,6 +16,18 @@
     <p>{!! $materialEntrega->empleado_id !!}</p>
 </div>
 
+<!-- Guid Field -->
+<div class="form-group">
+    {!! Form::label('guid', 'Guid:') !!}
+    <p>{!! $materialEntrega->guid !!}</p>
+</div>
+
+<!-- Barcode Field -->
+<div class="form-group">
+    {!! Form::label('barcode', 'Barcode:') !!}
+    <p>{!! $materialEntrega->barcode !!}</p>
+</div>
+
 <!-- Cantidad Field -->
 <div class="form-group">
     {!! Form::label('cantidad', 'Cantidad:') !!}

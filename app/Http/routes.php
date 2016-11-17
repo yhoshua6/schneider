@@ -69,4 +69,6 @@ Route::resource('produccionAreas', 'produccionAreaController');
 
 Route::resource('empleadoAreas', 'empleadoAreaController');
 
+
+
 Route::resource('materialEntregas', 'materialEntregaController');

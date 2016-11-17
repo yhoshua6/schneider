@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1 class="pull-left">Entregas de Material</h1>
         <h1 class="pull-right">
-           <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('materialEntregas.create') !!}">Agregar Nuevo Entrega</a>
+           <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('materialEntregas.create') !!}">Agregar Nueva Entrega de Material</a>
         </h1>
     </section>
     <div class="content">

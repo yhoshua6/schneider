@@ -13,6 +13,8 @@ class materialEntregaRepository extends BaseRepository
     protected $fieldSearchable = [
         'producto_id',
         'empleado_id',
+        'guid',
+        'barcode',
         'cantidad',
         'fechaEntrega'
     ];

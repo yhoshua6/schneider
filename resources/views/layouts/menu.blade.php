@@ -21,3 +21,4 @@
 <li class="{{ Request::is('empleadoAreas*') ? 'active' : '' }}">
     <a href="{!! route('empleadoAreas.index') !!}"><i class="fa fa-edit"></i><span>Relación Empleado - Area</span></a>
 </li>
+
