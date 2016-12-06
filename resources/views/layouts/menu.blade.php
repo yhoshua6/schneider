@@ -1,7 +1,3 @@
-<li class="{{ Request::is('materialEntregas*') ? 'active' : '' }}">
-    <a href="{!! route('materialEntregas.index') !!}"><i class="fa fa-edit"></i><span>Entregas de Material</span></a>
-</li>
-
 <li class="{{ Request::is('productos*') ? 'active' : '' }}">
     <a href="{!! route('productos.index') !!}"><i class="fa fa-edit"></i><span>Materiales</span></a>
 </li>
@@ -12,6 +8,10 @@
 
 <li class="{{ Request::is('empleados*') ? 'active' : '' }}">
     <a href="{!! route('empleados.index') !!}"><i class="fa fa-edit"></i><span>Empleados</span></a>
+</li>
+
+<li class="{{ Request::is('materialEntregas*') ? 'active' : '' }}">
+    <a href="{!! route('materialEntregas.index') !!}"><i class="fa fa-edit"></i><span>Entregas de Material</span></a>
 </li>
 
 <li class="{{ Request::is('estacions*') ? 'active' : '' }}">
