@@ -10,10 +10,22 @@
     {!! Form::text('nombre', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Imagen Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('imagen', 'Imagen:') !!}
+    {!! Form::text('imagen', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Empleado Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('empleado_id', 'Empleado:') !!}
+    {!! Form::label('empleado_id', 'Empleado Id:') !!}
     {!! Form::select('empleado_id',  $empleados, null, ['class' => 'form-control']) !!}
+</div>
+
+<!-- Estacion Id Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('estacion_id', 'Estacion Id:') !!}
+    {!! Form::select('estacion_id',  $estacions, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Submit Field -->

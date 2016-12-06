@@ -2,20 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Models\produccionArea;
+use App\Models\estacion;
 use InfyOm\Generator\Common\BaseRepository;
 
-class produccionAreaRepository extends BaseRepository
+class estacionRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        'codigo',
-        'nombre',
-        'imagen',
-        'empleado_id',
-        'estacion_id'
+        'nombre'
     ];
 
     /**
@@ -23,6 +19,6 @@ class produccionAreaRepository extends BaseRepository
      **/
     public function model()
     {
-        return produccionArea::class;
+        return estacion::class;
     }
 }

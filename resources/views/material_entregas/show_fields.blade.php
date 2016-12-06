@@ -4,16 +4,22 @@
     <p>{!! $materialEntrega->id !!}</p>
 </div>
 
+<!-- Cantidad Field -->
+<div class="form-group">
+    {!! Form::label('cantidad', 'Cantidad:') !!}
+    <p>{!! $materialEntrega->cantidad !!}</p>
+</div>
+
 <!-- Producto Id Field -->
 <div class="form-group">
-    {!! Form::label('producto_id', 'Producto Id:') !!}
-    <p>{!! $materialEntrega->producto_id !!}</p>
+    {!! Form::label('producto_id', 'Producto:') !!}
+    <p>{!! $materialEntrega->producto !!}</p>
 </div>
 
 <!-- Empleado Id Field -->
 <div class="form-group">
-    {!! Form::label('empleado_id', 'Empleado Id:') !!}
-    <p>{!! $materialEntrega->empleado_id !!}</p>
+    {!! Form::label('empleado_id', 'Empleado:') !!}
+    <p>{!! $materialEntrega->empleado !!}</p>
 </div>
 
 <!-- Guid Field -->
@@ -26,12 +32,6 @@
 <div class="form-group">
     {!! Form::label('barcode', 'Barcode:') !!}
     <p>{!! $materialEntrega->barcode !!}</p>
-</div>
-
-<!-- Cantidad Field -->
-<div class="form-group">
-    {!! Form::label('cantidad', 'Cantidad:') !!}
-    <p>{!! $materialEntrega->cantidad !!}</p>
 </div>
 
 <!-- Fechaentrega Field -->

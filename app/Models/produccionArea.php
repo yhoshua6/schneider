@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class produccionArea
  * @package App\Models
- * @version October 30, 2016, 4:01 am UTC
+ * @version December 6, 2016, 2:37 pm UTC
  */
 class produccionArea extends Model
 {
@@ -23,7 +23,9 @@ class produccionArea extends Model
     public $fillable = [
         'codigo',
         'nombre',
-        'empleado_id'
+        'imagen',
+        'empleado_id',
+        'estacion_id'
     ];
 
     /**
@@ -34,7 +36,9 @@ class produccionArea extends Model
     protected $casts = [
         'codigo' => 'string',
         'nombre' => 'string',
-        'empleado_id' => 'integer'
+        'imagen' => 'string',
+        'empleado_id' => 'integer',
+        'estacion_id' => 'integer'
     ];
 
     /**
@@ -45,7 +49,9 @@ class produccionArea extends Model
     public static $rules = [
         'codigo' => 'required',
         'nombre' => 'required',
-        'empleado_id' => 'required'
+        'imagen' => 'required',
+        'empleado_id' => 'required',
+        'estacion_id' => 'required'
     ];
 
     

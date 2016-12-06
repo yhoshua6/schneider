@@ -1,8 +1,8 @@
 <table class="table table-responsive" id="empleadoAreas-table">
     <thead>
-        <th>Empleado Id</th>
-        <th>Produccion Area Id</th>
-        <th>Turno</th>
+        <th>Empleado</th>
+        <th>Produccion Area</th>
+        <th>Estatus</th>
         <th>Created At</th>
         <th>Updated At</th>
         <th colspan="3">Action</th>
@@ -10,9 +10,15 @@
     <tbody>
     @foreach($empleadoAreas as $empleadoArea)
         <tr>
-            <td>{!! $empleadoArea->empleado_id !!}</td>
-            <td>{!! $empleadoArea->produccion_area_id !!}</td>
-            <td>{!! $empleadoArea->turno !!}</td>
+            <td>{!! $empleadoArea->empleado !!}</td>
+            <td>{!! $empleadoArea->produccion_area !!}</td>
+            <td>
+                @if ($empleadoArea->turno == 1)
+                    Activo
+                @elseif ($empleadoArea->turno == 0)
+                    Inactivo
+                @endif
+            </td>
             <td>{!! $empleadoArea->created_at !!}</td>
             <td>{!! $empleadoArea->updated_at !!}</td>
             <td>

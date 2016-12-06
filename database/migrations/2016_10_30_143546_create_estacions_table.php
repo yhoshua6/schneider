@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateproduccionAreasTable extends Migration
+class CreateestacionsTable extends Migration
 {
 
     /**
@@ -13,14 +13,11 @@ class CreateproduccionAreasTable extends Migration
      */
     public function up()
     {
-        Schema::create('produccion_areas', function (Blueprint $table) {
+        Schema::create('estacions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('codigo', 255);
             $table->string('nombre', 255);
-            $table->integer('empleado_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('empleado_id')->references('id')->on('empleados');
         });
     }
 
@@ -31,6 +28,6 @@ class CreateproduccionAreasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('produccion_areas');
+        Schema::drop('estacions');
     }
 }

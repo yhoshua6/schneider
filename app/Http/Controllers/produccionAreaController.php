@@ -6,6 +6,7 @@ use App\Http\Requests\CreateproduccionAreaRequest;
 use App\Http\Requests\UpdateproduccionAreaRequest;
 use App\Repositories\produccionAreaRepository;
 use App\Repositories\empleadoRepository;
+use App\Repositories\estacionRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -20,10 +21,14 @@ class produccionAreaController extends AppBaseController
     /** @var  empleadoRepository */
     private $empleadoRepository;
 
-    public function __construct(produccionAreaRepository $produccionAreaRepo, empleadoRepository $empleadoRepo)
+    /** @var  estacionRepository */
+    private $estacionRepository;
+
+    public function __construct(produccionAreaRepository $produccionAreaRepo, empleadoRepository $empleadoRepo, estacionRepository $estacionRepo)
     {
         $this->produccionAreaRepository = $produccionAreaRepo;
         $this->empleadoRepository = $empleadoRepo;
+        $this->estacionRepository = $estacionRepo;
     }
 
     /**
@@ -36,6 +41,21 @@ class produccionAreaController extends AppBaseController
     {
         $this->produccionAreaRepository->pushCriteria(new RequestCriteria($request));
         $produccionAreas = $this->produccionAreaRepository->all();
+
+        $empleados = $this->empleadoRepository->all();
+        $estacions = $this->estacionRepository->all();
+        foreach ($produccionAreas as $pa){ 
+            foreach ($empleados as $em){ 
+                if($pa->empleado_id == $em->id){
+                    $pa->empleado = $em->nombre;
+                }
+            }
+            foreach ($estacions as $es){ 
+                if($pa->estacion_id == $es->id){
+                    $pa->estacion = $es->nombre;
+                }
+            }
+        }
 
         return view('produccion_areas.index')
             ->with('produccionAreas', $produccionAreas);
@@ -51,12 +71,20 @@ class produccionAreaController extends AppBaseController
         $empleados = $this->empleadoRepository->all();
         $empleadosArray=[];
         $empleadosArray = array_add($empleadosArray, 0, "Selecciona una opción");
-
         foreach ($empleados as $em){ 
             $empleadosArray = array_add($empleadosArray, $em->id , $em->nombre);
         }
+
+        $estacions = $this->estacionRepository->all();
+        $estacionsArray=[];
+        $estacionsArray = array_add($estacionsArray, 0, "Selecciona una opción");
+        foreach ($estacions as $es){ 
+            $estacionsArray = array_add($estacionsArray, $es->id , $es->nombre);
+        }
+
         return view('produccion_areas.create')
-            ->with('empleados', $empleadosArray);
+            ->with('empleados', $empleadosArray)
+            ->with('estacions', $estacionsArray);
     }
 
     /**
@@ -94,6 +122,19 @@ class produccionAreaController extends AppBaseController
             return redirect(route('produccionAreas.index'));
         }
 
+        $empleados = $this->empleadoRepository->all();
+        $estacions = $this->estacionRepository->all();
+            foreach ($empleados as $em){ 
+                if($produccionArea->empleado_id == $em->id){
+                    $produccionArea->empleado = $em->nombre;
+                }
+            }
+            foreach ($estacions as $es){ 
+                if($produccionArea->estacion_id == $es->id){
+                    $produccionArea->estacion = $es->nombre;
+                }
+            }
+
         return view('produccion_areas.show')->with('produccionArea', $produccionArea);
     }
 
@@ -107,13 +148,19 @@ class produccionAreaController extends AppBaseController
     public function edit($id)
     {
         $produccionArea = $this->produccionAreaRepository->findWithoutFail($id);
-        $empleados = $this->empleadoRepository->all();
 
+        $empleados = $this->empleadoRepository->all();
         $empleadosArray=[];
         $empleadosArray = array_add($empleadosArray, 0, "Selecciona una opción");
-
         foreach ($empleados as $em){ 
             $empleadosArray = array_add($empleadosArray, $em->id , $em->nombre);
+        }
+
+        $estacions = $this->estacionRepository->all();
+        $estacionsArray=[];
+        $estacionsArray = array_add($estacionsArray, 0, "Selecciona una opción");
+        foreach ($estacions as $es){ 
+            $estacionsArray = array_add($estacionsArray, $es->id , $es->nombre);
         }
 
         if (empty($produccionArea)) {
@@ -124,7 +171,8 @@ class produccionAreaController extends AppBaseController
 
         return view('produccion_areas.edit')
             ->with('produccionArea', $produccionArea)
-            ->with('empleados', $empleadosArray);
+            ->with('empleados', $empleadosArray)
+            ->with('estacions', $estacionsArray);
     }
 
     /**

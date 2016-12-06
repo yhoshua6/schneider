@@ -42,6 +42,21 @@ class materialEntregaController extends AppBaseController
         $this->materialEntregaRepository->pushCriteria(new RequestCriteria($request));
         $materialEntregas = $this->materialEntregaRepository->all();
 
+        $empleados = $this->empleadoRepository->all();
+        $productos = $this->productosRepository->all();
+        foreach ($materialEntregas as $me){ 
+            foreach ($empleados as $em){ 
+                if($me->empleado_id == $em->id){
+                    $me->empleado = $em->nombre;
+                }
+            }
+            foreach ($productos as $pr){ 
+                if($me->producto_id == $pr->id){
+                    $me->producto = $pr->nombre;
+                }
+            }
+        }
+
         return view('material_entregas.index')
             ->with('materialEntregas', $materialEntregas);
     }
@@ -106,6 +121,19 @@ class materialEntregaController extends AppBaseController
 
             return redirect(route('materialEntregas.index'));
         }
+
+        $empleados = $this->empleadoRepository->all();
+        $productos = $this->productosRepository->all();
+            foreach ($empleados as $em){ 
+                if($materialEntrega->empleado_id == $em->id){
+                    $materialEntrega->empleado = $em->nombre;
+                }
+            }
+            foreach ($productos as $pr){ 
+                if($materialEntrega->producto_id == $pr->id){
+                    $materialEntrega->producto = $pr->nombre;
+                }
+            }
 
         return view('material_entregas.show')->with('materialEntrega', $materialEntrega);
     }

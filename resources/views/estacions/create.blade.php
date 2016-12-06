@@ -3,15 +3,20 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Produccion Area
+            Estación
         </h1>
     </section>
     <div class="content">
+        @include('adminlte-templates::common.errors')
         <div class="box box-success">
+
             <div class="box-body">
-                <div class="row" style="padding-left: 20px">
-                    @include('produccion_areas.show_fields')
-                    <a href="{!! route('produccionAreas.index') !!}" class="btn btn-default">Regresar</a>
+                <div class="row">
+                    {!! Form::open(['route' => 'estacions.store']) !!}
+
+                        @include('estacions.fields')
+
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

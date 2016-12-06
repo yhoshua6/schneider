@@ -6,14 +6,20 @@
 
 <!-- Tipo Empleado Id Field -->
 <div class="form-group">
-    {!! Form::label('tipo_empleado_id', 'Tipo Empleado Id:') !!}
-    <p>{!! $empleado->tipo_empleado_id !!}</p>
+    {!! Form::label('tipo_empleado_id', 'Tipo Empleado:') !!}
+    <p>{!! $empleado->tipo_empleado !!}</p>
 </div>
 
 <!-- Turno Field -->
 <div class="form-group">
     {!! Form::label('turno', 'Turno:') !!}
-    <p>{!! $empleado->turno !!}</p>
+    <p>
+        @if ($empleado->turno == 2)
+            Vespertino
+        @elseif ($empleado->turno === 1)
+            Matutino
+        @endif
+    </p>
 </div>
 
 <!-- Guid Field -->
@@ -31,7 +37,13 @@
 <!-- Genero Field -->
 <div class="form-group">
     {!! Form::label('genero', 'Genero:') !!}
-    <p>{!! $empleado->genero !!}</p>
+    <p>
+        @if ($empleado->genero == 1)
+            Masculino
+        @elseif ($empleado->genero === 0)
+            Femenino
+        @endif
+    </p>
 </div>
 
 <!-- Antiguedad Field -->
@@ -43,7 +55,11 @@
 <!-- Bataentrega Field -->
 <div class="form-group">
     {!! Form::label('bataEntrega', 'Bataentrega:') !!}
-    <p>{!! $empleado->bataEntrega !!}</p>
+    <p>@if ($empleado->bataEntrega == 1)
+                    Si
+                @elseif ($empleado->bataEntrega === 0)
+                    No
+                @endif</p>
 </div>
 
 <!-- Batatalla Field -->
@@ -55,7 +71,11 @@
 <!-- Camisaentrega Field -->
 <div class="form-group">
     {!! Form::label('camisaEntrega', 'Camisaentrega:') !!}
-    <p>{!! $empleado->camisaEntrega !!}</p>
+    <p>@if ($empleado->camisaEntrega == 1)
+                    Si
+                @elseif ($empleado->camisaEntrega === 0)
+                    No
+                @endif</p>
 </div>
 
 <!-- Camisatalla Field -->
@@ -67,7 +87,11 @@
 <!-- Pantalonentrega Field -->
 <div class="form-group">
     {!! Form::label('pantalonEntrega', 'Pantalonentrega:') !!}
-    <p>{!! $empleado->pantalonEntrega !!}</p>
+    <p>@if ($empleado->pantalonEntrega == 1)
+                    Si
+                @elseif ($empleado->pantalonEntrega === 0)
+                    No
+                @endif</p>
 </div>
 
 <!-- Pantalontalla Field -->

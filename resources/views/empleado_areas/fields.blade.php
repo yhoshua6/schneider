@@ -12,7 +12,7 @@
 
 <!-- Turno Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('turno', 'Turno:') !!}
+    {!! Form::label('turno', 'Estatus:') !!}
     {!! Form::select('turno', ['1' => 'Activo', '0' => 'Inactivo'], null, ['class' => 'form-control']) !!}
 </div>
 

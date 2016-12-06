@@ -16,7 +16,7 @@
     @foreach($productos as $productos)
         <tr>
             <td>{!! $productos->codigo !!}</td>
-            <td>{!! $productos->imagen !!}</td>
+            <td><img src="{!! $productos->imagen !!}" width="100px"></td>
             <td>{!! $productos->nombre !!}</td>
             <td>{!! $productos->talla !!}</td>
             <td>{!! $productos->color !!}</td>

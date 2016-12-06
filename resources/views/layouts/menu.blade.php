@@ -6,12 +6,16 @@
     <a href="{!! route('productos.index') !!}"><i class="fa fa-edit"></i><span>Materiales</span></a>
 </li>
 
+<li class="{{ Request::is('tipoEmpleados*') ? 'active' : '' }}">
+    <a href="{!! route('tipoEmpleados.index') !!}"><i class="fa fa-edit"></i><span>Tipos de Empleados</span></a>
+</li>
+
 <li class="{{ Request::is('empleados*') ? 'active' : '' }}">
     <a href="{!! route('empleados.index') !!}"><i class="fa fa-edit"></i><span>Empleados</span></a>
 </li>
 
-<li class="{{ Request::is('tipoEmpleados*') ? 'active' : '' }}">
-    <a href="{!! route('tipoEmpleados.index') !!}"><i class="fa fa-edit"></i><span>Tipos de Empleados</span></a>
+<li class="{{ Request::is('estacions*') ? 'active' : '' }}">
+    <a href="{!! route('estacions.index') !!}"><i class="fa fa-edit"></i><span>Estaciones</span></a>
 </li>
 
 <li class="{{ Request::is('produccionAreas*') ? 'active' : '' }}">
@@ -21,3 +25,5 @@
 <li class="{{ Request::is('empleadoAreas*') ? 'active' : '' }}">
     <a href="{!! route('empleadoAreas.index') !!}"><i class="fa fa-edit"></i><span>Relación Empleado - Area</span></a>
 </li>
+
+

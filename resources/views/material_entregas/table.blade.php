@@ -1,10 +1,10 @@
 <table class="table table-responsive" id="materialEntregas-table">
     <thead>
-        <th>Producto Id</th>
-        <th>Empleado Id</th>
-        <th>Guid</th>
-        <th>Barcode</th>
         <th>Cantidad</th>
+        <th>Producto</th>
+        <th>Empleado</th>
+        <!--<th>Guid</th>-->
+        <th>Barcode</th>
         <th>Fechaentrega</th>
         <th>Created At</th>
         <th>Updated At</th>
@@ -13,11 +13,11 @@
     <tbody>
     @foreach($materialEntregas as $materialEntrega)
         <tr>
-            <td>{!! $materialEntrega->producto_id !!}</td>
-            <td>{!! $materialEntrega->empleado_id !!}</td>
-            <td>{!! $materialEntrega->guid !!}</td>
-            <td>{!! $materialEntrega->barcode !!}</td>
             <td>{!! $materialEntrega->cantidad !!}</td>
+            <td>{!! $materialEntrega->producto !!}</td>
+            <td>{!! $materialEntrega->empleado !!}</td>
+            <!--<td>{!! $materialEntrega->guid !!}</td>-->
+            <td>{!! $materialEntrega->barcode !!}</td>
             <td>{!! $materialEntrega->fechaEntrega !!}</td>
             <td>{!! $materialEntrega->created_at !!}</td>
             <td>{!! $materialEntrega->updated_at !!}</td>

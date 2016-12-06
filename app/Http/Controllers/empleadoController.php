@@ -36,7 +36,14 @@ class empleadoController extends AppBaseController
     {
         $this->empleadoRepository->pushCriteria(new RequestCriteria($request));
         $empleados = $this->empleadoRepository->all();
-
+        $tipoEmpleados = $this->tipoEmpleadoRepository->all();
+        foreach ($empleados as $em){ 
+            foreach ($tipoEmpleados as $te){ 
+                if($em->tipo_empleado_id == $te->id){
+                    $em->tipo_empleado = $te->nombre;
+                }
+            }
+        }
         return view('empleados.index')
             ->with('empleados', $empleados);
     }
@@ -93,6 +100,13 @@ class empleadoController extends AppBaseController
             Flash::error('Empleado not found');
 
             return redirect(route('empleados.index'));
+        }
+
+        $tipoEmpleados = $this->tipoEmpleadoRepository->all();
+        foreach ($tipoEmpleados as $te){ 
+            if($empleado->tipo_empleado_id == $te->id){
+                $empleado->tipo_empleado = $te->nombre;
+            }
         }
 
         return view('empleados.show')->with('empleado', $empleado);

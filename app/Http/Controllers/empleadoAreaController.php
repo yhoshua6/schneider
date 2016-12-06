@@ -42,6 +42,21 @@ class empleadoAreaController extends AppBaseController
         $this->empleadoAreaRepository->pushCriteria(new RequestCriteria($request));
         $empleadoAreas = $this->empleadoAreaRepository->all();
 
+        $empleados = $this->empleadoRepository->all();
+        $produccionAreas = $this->produccionAreaRepository->all();
+        foreach ($empleadoAreas as $ea){ 
+            foreach ($empleados as $em){ 
+                if($ea->empleado_id == $em->id){
+                    $ea->empleado = $em->nombre;
+                }
+            }
+            foreach ($produccionAreas as $pa){ 
+                if($ea->produccion_area_id == $pa->id){
+                    $ea->produccion_area = $pa->nombre;
+                }
+            }
+        }
+
         return view('empleado_areas.index')
             ->with('empleadoAreas', $empleadoAreas);
     }
@@ -109,6 +124,19 @@ class empleadoAreaController extends AppBaseController
 
             return redirect(route('empleadoAreas.index'));
         }
+
+        $empleados = $this->empleadoRepository->all();
+        $produccionAreas = $this->produccionAreaRepository->all();
+            foreach ($empleados as $em){ 
+                if($empleadoArea->empleado_id == $em->id){
+                    $empleadoArea->empleado = $em->nombre;
+                }
+            }
+            foreach ($produccionAreas as $pa){ 
+                if($empleadoArea->produccion_area_id == $pa->id){
+                    $empleadoArea->produccion_area = $pa->nombre;
+                }
+            }
 
         return view('empleado_areas.show')->with('empleadoArea', $empleadoArea);
     }
