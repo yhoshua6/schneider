@@ -16,6 +16,12 @@
     <p>{!! $empleadoArea->produccion_area_id !!}</p>
 </div>
 
+<!-- Turno Field -->
+<div class="form-group">
+    {!! Form::label('turno', 'Turno:') !!}
+    <p>{!! $empleadoArea->turno !!}</p>
+</div>
+
 <!-- Created At Field -->
 <div class="form-group">
     {!! Form::label('created_at', 'Created At:') !!}

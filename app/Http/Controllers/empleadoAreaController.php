@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateempleadoAreaRequest;
 use App\Http\Requests\UpdateempleadoAreaRequest;
 use App\Repositories\empleadoAreaRepository;
+use App\Repositories\empleadoRepository;
+use App\Repositories\produccionAreaRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -16,9 +18,17 @@ class empleadoAreaController extends AppBaseController
     /** @var  empleadoAreaRepository */
     private $empleadoAreaRepository;
 
-    public function __construct(empleadoAreaRepository $empleadoAreaRepo)
+    /** @var  empleadoRepository */
+    private $empleadoRepository;
+
+    /** @var  produccionAreaRepository */
+    private $produccionAreaRepository;
+
+    public function __construct(empleadoAreaRepository $empleadoAreaRepo, empleadoRepository $empleadoRepo, produccionAreaRepository $produccionAreaRepo)
     {
         $this->empleadoAreaRepository = $empleadoAreaRepo;
+        $this->empleadoRepository = $empleadoRepo;
+        $this->produccionAreaRepository = $produccionAreaRepo;
     }
 
     /**
@@ -43,7 +53,26 @@ class empleadoAreaController extends AppBaseController
      */
     public function create()
     {
-        return view('empleado_areas.create');
+        $empleados = $this->empleadoRepository->all();
+        $produccionAreas = $this->produccionAreaRepository->all();
+
+        $EmpleadosArray=[];
+        $EmpleadosArray = array_add($EmpleadosArray, 0, "Selecciona una opción");
+
+        $produccionAreasArray=[];
+        $produccionAreasArray = array_add($produccionAreasArray, 0, "Selecciona una opción");
+
+        foreach ($empleados as $sku){ 
+            $EmpleadosArray = array_add($EmpleadosArray, $sku->id , $sku->nombre);
+        }
+
+        foreach ($produccionAreas as $pa){ 
+            $produccionAreasArray = array_add($produccionAreasArray, $pa->id , $pa->nombre);
+        }
+
+        return view('empleado_areas.create')
+            ->with('empleados', $EmpleadosArray)
+            ->with('produccionAreas', $produccionAreasArray);
     }
 
     /**
@@ -94,6 +123,22 @@ class empleadoAreaController extends AppBaseController
     public function edit($id)
     {
         $empleadoArea = $this->empleadoAreaRepository->findWithoutFail($id);
+        $empleados = $this->empleadoRepository->all();
+        $produccionAreas = $this->produccionAreaRepository->all();
+
+        $EmpleadosArray=[];
+        $EmpleadosArray = array_add($EmpleadosArray, 0, "Selecciona una opción");
+
+        $produccionAreasArray=[];
+        $produccionAreasArray = array_add($produccionAreasArray, 0, "Selecciona una opción");
+
+        foreach ($empleados as $sku){ 
+            $EmpleadosArray = array_add($EmpleadosArray, $sku->id , $sku->nombre);
+        }
+
+        foreach ($produccionAreas as $pa){ 
+            $produccionAreasArray = array_add($produccionAreasArray, $pa->id , $pa->nombre);
+        }
 
         if (empty($empleadoArea)) {
             Flash::error('Empleado Area not found');
@@ -101,7 +146,10 @@ class empleadoAreaController extends AppBaseController
             return redirect(route('empleadoAreas.index'));
         }
 
-        return view('empleado_areas.edit')->with('empleadoArea', $empleadoArea);
+        return view('empleado_areas.edit')
+            ->with('empleadoArea', $empleadoArea)
+            ->with('empleados', $EmpleadosArray)
+            ->with('produccionAreas', $produccionAreasArray);
     }
 
     /**

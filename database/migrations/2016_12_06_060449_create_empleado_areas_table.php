@@ -17,6 +17,7 @@ class CreateempleadoAreasTable extends Migration
             $table->increments('id');
             $table->integer('empleado_id')->unsigned();
             $table->integer('produccion_area_id')->unsigned();
+            $table->integer('turno');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('empleado_id')->references('id')->on('empleados');

@@ -2,9 +2,9 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Relaciónes Empleado - Area</h1>
+        <h1 class="pull-left">Empleado Areas</h1>
         <h1 class="pull-right">
-           <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('empleadoAreas.create') !!}">Agregar Empleado a Area</a>
+           <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('empleadoAreas.create') !!}">Agregar una nueva relación</a>
         </h1>
     </section>
     <div class="content">

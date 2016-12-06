@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateempleadoRequest;
 use App\Http\Requests\UpdateempleadoRequest;
 use App\Repositories\empleadoRepository;
+use App\Repositories\tipoEmpleadoRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -16,9 +17,13 @@ class empleadoController extends AppBaseController
     /** @var  empleadoRepository */
     private $empleadoRepository;
 
-    public function __construct(empleadoRepository $empleadoRepo)
+    /** @var  tipoEmpleadoRepository */
+    private $tipoEmpleadoRepository;
+
+    public function __construct(empleadoRepository $empleadoRepo, tipoEmpleadoRepository $tipoEmpleadoRepo)
     {
         $this->empleadoRepository = $empleadoRepo;
+        $this->tipoEmpleadoRepository = $tipoEmpleadoRepo;
     }
 
     /**
@@ -43,7 +48,16 @@ class empleadoController extends AppBaseController
      */
     public function create()
     {
-        return view('empleados.create');
+        $tipoEmpleados = $this->tipoEmpleadoRepository->all();
+
+        $tipoEmpleadosArray=[];
+        $tipoEmpleadosArray = array_add($tipoEmpleadosArray, 0, "Selecciona una opción");
+
+        foreach ($tipoEmpleados as $te){ 
+            $tipoEmpleadosArray = array_add($tipoEmpleadosArray, $te->id , $te->nombre);
+        }
+        return view('empleados.create')
+            ->with('tipoEmpleados', $tipoEmpleadosArray);
     }
 
     /**
@@ -94,6 +108,14 @@ class empleadoController extends AppBaseController
     public function edit($id)
     {
         $empleado = $this->empleadoRepository->findWithoutFail($id);
+        $tipoEmpleados = $this->tipoEmpleadoRepository->all();
+
+        $tipoEmpleadosArray=[];
+        $tipoEmpleadosArray = array_add($tipoEmpleadosArray, 0, "Selecciona una opción");
+
+        foreach ($tipoEmpleados as $te){ 
+            $tipoEmpleadosArray = array_add($tipoEmpleadosArray, $te->id , $te->nombre);
+        }
 
         if (empty($empleado)) {
             Flash::error('Empleado not found');
@@ -101,7 +123,9 @@ class empleadoController extends AppBaseController
             return redirect(route('empleados.index'));
         }
 
-        return view('empleados.edit')->with('empleado', $empleado);
+        return view('empleados.edit')
+            ->with('empleado', $empleado)
+            ->with('tipoEmpleados', $tipoEmpleadosArray);
     }
 
     /**

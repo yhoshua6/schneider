@@ -1,7 +1,7 @@
 <!-- Tipo Empleado Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('tipo_empleado_id', 'Tipo Empleado Id:') !!}
-    {!! Form::number('tipo_empleado_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('tipo_empleado_id', 'Tipo de Empleado:') !!}
+    {!! Form::select('tipo_empleado_id',  $tipoEmpleados, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Turno Field -->

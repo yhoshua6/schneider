@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Editar Relación Empleado - Area
+            Empleado Area
         </h1>
    </section>
    <div class="content">

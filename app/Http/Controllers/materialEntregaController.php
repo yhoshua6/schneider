@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreatematerialEntregaRequest;
 use App\Http\Requests\UpdatematerialEntregaRequest;
 use App\Repositories\materialEntregaRepository;
+use App\Repositories\productosRepository;
+use App\Repositories\empleadoRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -16,9 +18,17 @@ class materialEntregaController extends AppBaseController
     /** @var  materialEntregaRepository */
     private $materialEntregaRepository;
 
-    public function __construct(materialEntregaRepository $materialEntregaRepo)
+    /** @var  productosRepository */
+    private $productosRepository;
+
+    /** @var  empleadoRepository */
+    private $empleadoRepository;
+
+    public function __construct(materialEntregaRepository $materialEntregaRepo, productosRepository $productosRepo, empleadoRepository $empleadoRepo)
     {
         $this->materialEntregaRepository = $materialEntregaRepo;
+        $this->productosRepository = $productosRepo;
+        $this->empleadoRepository = $empleadoRepo;
     }
 
     /**
@@ -43,7 +53,23 @@ class materialEntregaController extends AppBaseController
      */
     public function create()
     {
-        return view('material_entregas.create');
+        $productos = $this->productosRepository->all();
+        $productosArray=[];
+        $productosArray = array_add($productosArray, 0, "Selecciona una opción");
+        foreach ($productos as $pro){ 
+            $productosArray = array_add($productosArray, $pro->id , $pro->nombre);
+        }
+
+        $empleados = $this->empleadoRepository->all();
+        $empleadosArray=[];
+        $empleadosArray = array_add($empleadosArray, 0, "Selecciona una opción");
+        foreach ($empleados as $em){ 
+            $empleadosArray = array_add($empleadosArray, $em->id , $em->nombre);
+        }
+
+        return view('material_entregas.create')
+            ->with('productos', $productosArray)
+            ->with('empleados', $empleadosArray);
     }
 
     /**
@@ -95,13 +121,30 @@ class materialEntregaController extends AppBaseController
     {
         $materialEntrega = $this->materialEntregaRepository->findWithoutFail($id);
 
+        $productos = $this->productosRepository->all();
+        $productosArray=[];
+        $productosArray = array_add($productosArray, 0, "Selecciona una opción");
+        foreach ($productos as $pro){ 
+            $productosArray = array_add($productosArray, $pro->id , $pro->nombre);
+        }
+
+        $empleados = $this->empleadoRepository->all();
+        $empleadosArray=[];
+        $empleadosArray = array_add($empleadosArray, 0, "Selecciona una opción");
+        foreach ($empleados as $em){ 
+            $empleadosArray = array_add($empleadosArray, $em->id , $em->nombre);
+        }
+
         if (empty($materialEntrega)) {
             Flash::error('Material Entrega not found');
 
             return redirect(route('materialEntregas.index'));
         }
 
-        return view('material_entregas.edit')->with('materialEntrega', $materialEntrega);
+        return view('material_entregas.edit')
+            ->with('materialEntrega', $materialEntrega)
+            ->with('productos', $productosArray)
+            ->with('empleados', $empleadosArray);
     }
 
     /**

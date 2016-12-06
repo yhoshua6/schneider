@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateproduccionAreaRequest;
 use App\Http\Requests\UpdateproduccionAreaRequest;
 use App\Repositories\produccionAreaRepository;
+use App\Repositories\empleadoRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -16,9 +17,13 @@ class produccionAreaController extends AppBaseController
     /** @var  produccionAreaRepository */
     private $produccionAreaRepository;
 
-    public function __construct(produccionAreaRepository $produccionAreaRepo)
+    /** @var  empleadoRepository */
+    private $empleadoRepository;
+
+    public function __construct(produccionAreaRepository $produccionAreaRepo, empleadoRepository $empleadoRepo)
     {
         $this->produccionAreaRepository = $produccionAreaRepo;
+        $this->empleadoRepository = $empleadoRepo;
     }
 
     /**
@@ -43,7 +48,15 @@ class produccionAreaController extends AppBaseController
      */
     public function create()
     {
-        return view('produccion_areas.create');
+        $empleados = $this->empleadoRepository->all();
+        $empleadosArray=[];
+        $empleadosArray = array_add($empleadosArray, 0, "Selecciona una opción");
+
+        foreach ($empleados as $em){ 
+            $empleadosArray = array_add($empleadosArray, $em->id , $em->nombre);
+        }
+        return view('produccion_areas.create')
+            ->with('empleados', $empleadosArray);
     }
 
     /**
@@ -94,6 +107,14 @@ class produccionAreaController extends AppBaseController
     public function edit($id)
     {
         $produccionArea = $this->produccionAreaRepository->findWithoutFail($id);
+        $empleados = $this->empleadoRepository->all();
+
+        $empleadosArray=[];
+        $empleadosArray = array_add($empleadosArray, 0, "Selecciona una opción");
+
+        foreach ($empleados as $em){ 
+            $empleadosArray = array_add($empleadosArray, $em->id , $em->nombre);
+        }
 
         if (empty($produccionArea)) {
             Flash::error('Produccion Area not found');
@@ -101,7 +122,9 @@ class produccionAreaController extends AppBaseController
             return redirect(route('produccionAreas.index'));
         }
 
-        return view('produccion_areas.edit')->with('produccionArea', $produccionArea);
+        return view('produccion_areas.edit')
+            ->with('produccionArea', $produccionArea)
+            ->with('empleados', $empleadosArray);
     }
 
     /**

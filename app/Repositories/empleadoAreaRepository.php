@@ -12,7 +12,8 @@ class empleadoAreaRepository extends BaseRepository
      */
     protected $fieldSearchable = [
         'empleado_id',
-        'produccion_area_id'
+        'produccion_area_id',
+        'turno'
     ];
 
     /**
